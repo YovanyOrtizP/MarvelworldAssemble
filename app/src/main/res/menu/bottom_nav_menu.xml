@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_characters"
+        android:title="Characters"
+        android:icon="@drawable/marvel_icon"/>
+
+    <item
+        android:id="@+id/navigation_series"
+        android:title="Series"
+        android:icon="@drawable/gauntlet_icon"/>
+
+    <item
+        android:id="@+id/navigation_comics"
+        android:title="Comics"
+        android:icon="@drawable/icon_comics"/>
+
+</menu>
