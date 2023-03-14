@@ -26,17 +26,30 @@ class MarvelActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        botNav = binding.navView
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        navController = navHostFragment.navController
-        supportActionBar?.hide()
-//        setupActionBarWithNavController(navController)
-        botNav.setupWithNavController(navController)
+        val currentUser = firebaseAuth.currentUser
 
-        binding.signOutButton.setOnClickListener{
-            firebaseAuth.signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+        if (currentUser != null) {
+            botNav = binding.navView
+            val navHostFragment =
+                supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+            navController = navHostFragment.navController
+            supportActionBar?.hide()
+//          setupActionBarWithNavController(navController)
+            botNav.setupWithNavController(navController)
+
+            binding.signOutButton.setOnClickListener {
+                firebaseAuth.signOut()
+                logOut()
+            }
+        } else {
+            logOut()
         }
+
+    }
+
+    private fun logOut() {
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
     }
 }
+
