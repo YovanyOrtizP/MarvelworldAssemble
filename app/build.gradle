@@ -20,6 +20,7 @@ android {
         applicationId "com.yorpe.MarvelWorldAssemble"
         minSdk 24
         targetSdk 33
+        //Every change I have to update the version code +1
         versionCode 1
         versionName "1.0"
 
