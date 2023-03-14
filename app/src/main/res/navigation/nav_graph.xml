@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_characters"
-        android:name="com.example.marvelapp.ui.main.characters.CharactersFragment"
+        android:name="com.yorpe.MarvelWorldAssemble.ui.main.characters.CharactersFragment"
         android:label="Characters"
         tools:layout="@layout/fragment_characters" />
 
     <fragment
         android:id="@+id/navigation_series"
-        android:name="com.example.marvelapp.ui.main.series.SeriesFragment"
+        android:name="com.yorpe.MarvelWorldAssemble.ui.main.series.SeriesFragment"
         android:label="Characters"
         tools:layout="@layout/fragment_series" />
 
     <fragment
         android:id="@+id/navigation_comics"
-        android:name="com.example.marvelapp.ui.main.comics.ComicsFragment"
+        android:name="com.yorpe.MarvelWorldAssemble.ui.main.comics.ComicsFragment"
         android:label="Characters"
         tools:layout="@layout/fragment_comics" />
 

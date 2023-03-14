@@ -9,10 +9,47 @@
       "client_info": {
         "mobilesdk_app_id": "1:1083030681074:android:cad6971d5f4cdd6697676b",
         "android_client_info": {
+          "package_name": "com.example.marvelapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083030681074-tpm0hbdedp6l8c76ov8qilrk4bq4riks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbV12h4L6kQA8K0Ysh3j5_mrmNoobsO3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083030681074-tpm0hbdedp6l8c76ov8qilrk4bq4riks.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083030681074:android:4fe9bb14fce6728597676b",
+        "android_client_info": {
           "package_name": "com.yorpe.MarvelWorldAssemble"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "1083030681074-73j6jc7ns1on3uscp954sp7onl19vr88.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yorpe.MarvelWorldAssemble",
+            "certificate_hash": "46a0b1b62461cefbbfbc7d603d86f4220cfaf0ec"
+          }
+        },
         {
           "client_id": "1083030681074-tpm0hbdedp6l8c76ov8qilrk4bq4riks.apps.googleusercontent.com",
           "client_type": 3
