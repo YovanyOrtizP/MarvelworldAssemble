@@ -16,15 +16,14 @@ import com.yorpe.MarvelWorldAssemble.data.model.characters.CharactersResponse
 import com.yorpe.MarvelWorldAssemble.data.model.characters.ResultCResp
 import com.yorpe.MarvelWorldAssemble.databinding.FragmentCharactersBinding
 import com.yorpe.MarvelWorldAssemble.ui.main.viewmodel.GeneralViewModel
+import com.yorpe.MarvelWorldAssemble.util.BaseFragment
 import com.yorpe.MarvelWorldAssemble.util.ResponseType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CharactersFragment : Fragment() {
+class CharactersFragment : BaseFragment() {
     private var _binding: FragmentCharactersBinding? = null
     private val binding get() = _binding!!
-
-    private val viewModel: GeneralViewModel by activityViewModels()
 
 
     private val mAdapter by lazy {
@@ -102,13 +101,5 @@ class CharactersFragment : Fragment() {
                 viewModel.flowCharacters(searchCharacter)
             }, 1500)
         }
-    }
-
-    private fun hideKeyboard() {
-        val activity = requireActivity()
-        val inputMethodManager =
-            activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        val view = activity.currentFocus ?: View(activity)
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
