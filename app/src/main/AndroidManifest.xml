@@ -22,7 +22,6 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar"
             android:noHistory="true"/>
         <activity
             android:name=".ui.splash.SplashActivity"
