@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -51,6 +52,7 @@ class SeriesFragment : Fragment() {
                     binding.pbLoading.visibility = View.GONE
                 }
                 is ResponseType.ERROR ->{
+                    Toast.makeText(context,"Series Not Found", Toast.LENGTH_SHORT).show()
                     binding.pbLoading.visibility = View.GONE
                 }
                 else ->{}
