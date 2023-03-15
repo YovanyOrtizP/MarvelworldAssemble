@@ -20,14 +20,14 @@ class MarvelRepositoryImpl @Inject constructor(
         emit(ResponseType.LOADING)
 
         try {
-            val response = if(nameStartsWith != null) {
-                marvelApi.getCharacters(nameStartsWith,LIMIT,TS, APIKEY, HASH)
-            }else{
-                marvelApi.getCharacters(null,LIMIT,TS, APIKEY, HASH)
-            }
+            val response = marvelApi.getCharacters(nameStartsWith,LIMIT,TS, APIKEY, HASH)
             if(response.isSuccessful){
                 response.body()?.let { info ->
-                    emit(ResponseType.SUCCESS(info))
+                    if (info.data?.results.isNullOrEmpty()) {
+                        throw Exception("NO FOUND")
+                    } else {
+                        emit(ResponseType.SUCCESS(info))
+                    }
                 }
             }else{
                 emit(ResponseType.ERROR(response.message()))
@@ -41,14 +41,14 @@ class MarvelRepositoryImpl @Inject constructor(
         emit(ResponseType.LOADING)
 
         try {
-            val response = if(titleStartsWith != null) {
-                marvelApi.getSeries(titleStartsWith,LIMIT,TS, APIKEY, HASH)
-            }else {
-                marvelApi.getSeries(null, LIMIT, TS, APIKEY, HASH)
-            }
+            val response = marvelApi.getSeries(titleStartsWith,LIMIT,TS, APIKEY, HASH)
             if(response.isSuccessful){
                 response.body()?.let { info ->
-                    emit(ResponseType.SUCCESS(info))
+                    if (info.data?.results.isNullOrEmpty()) {
+                        throw Exception("NO FOUND")
+                    } else {
+                        emit(ResponseType.SUCCESS(info))
+                    }
                 }
             }else{
                 emit(ResponseType.ERROR(response.message()))
@@ -62,14 +62,14 @@ class MarvelRepositoryImpl @Inject constructor(
         emit(ResponseType.LOADING)
 
         try {
-            val response = if(titleStartsWith != null) {
-                marvelApi.getComics(titleStartsWith,LIMIT,TS, APIKEY, HASH)
-            }else {
-                marvelApi.getComics(null, LIMIT, TS, APIKEY, HASH)
-            }
+            val response = marvelApi.getComics(titleStartsWith,LIMIT,TS, APIKEY, HASH)
             if(response.isSuccessful){
                 response.body()?.let { info ->
-                    emit(ResponseType.SUCCESS(info))
+                    if (info.data?.results.isNullOrEmpty()) {
+                        throw Exception("NO FOUND")
+                    } else {
+                        emit(ResponseType.SUCCESS(info))
+                    }
                 }
             }else{
                 emit(ResponseType.ERROR(response.message()))

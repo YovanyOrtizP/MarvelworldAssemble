@@ -40,42 +40,24 @@ class GeneralViewModel @Inject constructor(
 
     fun flowComics(nameStartsWith: String? = null) {
         viewModelScope.launch(ioDispatcher) {
-            if (nameStartsWith != null) {
-                marvelRepository.getComicsFlow(nameStartsWith).collect() {
-                    _resultComics.postValue(it)
-                }
-            } else {
-                marvelRepository.getComicsFlow().collect() {
-                    _resultComics.postValue(it)
-                }
+            marvelRepository.getComicsFlow(nameStartsWith).collect() {
+                _resultComics.postValue(it)
             }
         }
     }
 
     fun flowSeries(nameStartsWith: String? = null) {
         viewModelScope.launch(ioDispatcher) {
-            if (nameStartsWith != null) {
-                marvelRepository.getSeriesFlow(nameStartsWith).collect() {
-                    _resultSeries.postValue(it)
-                }
-            } else {
-                marvelRepository.getSeriesFlow().collect() {
-                    _resultSeries.postValue(it)
-                }
+            marvelRepository.getSeriesFlow(nameStartsWith).collect() {
+                _resultSeries.postValue(it)
             }
         }
     }
 
     fun flowCharacters(nameStartsWith: String? = null) {
         viewModelScope.launch(ioDispatcher) {
-            if (nameStartsWith != null) {
-                marvelRepository.getCharactersFlow(nameStartsWith).collect() {
-                    _resultCharacters.postValue(it)
-                }
-            } else {
-                marvelRepository.getCharactersFlow().collect() {
-                    _resultCharacters.postValue(it)
-                }
+            marvelRepository.getCharactersFlow(nameStartsWith).collect() {
+                _resultCharacters.postValue(it)
             }
         }
     }
