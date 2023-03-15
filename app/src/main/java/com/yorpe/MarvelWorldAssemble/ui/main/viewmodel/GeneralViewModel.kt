@@ -23,6 +23,8 @@ class GeneralViewModel @Inject constructor(
     private val marvelRepository: MarvelRepository
 ) : ViewModel() {
 
+    var searchQuery: String? = null
+
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
 
     var charObject: ResultCResp? = null
@@ -38,25 +40,25 @@ class GeneralViewModel @Inject constructor(
     val resultComics: LiveData<ResponseType<ComicsResponse>> = _resultComics
 
 
-    fun flowComics(nameStartsWith: String? = null) {
+    fun flowComics(searchQuery: String? = null) {
         viewModelScope.launch(ioDispatcher) {
-            marvelRepository.getComicsFlow(nameStartsWith).collect() {
+            marvelRepository.getComicsFlow(searchQuery).collect() {
                 _resultComics.postValue(it)
             }
         }
     }
 
-    fun flowSeries(nameStartsWith: String? = null) {
+    fun flowSeries(searchQuery: String? = null) {
         viewModelScope.launch(ioDispatcher) {
-            marvelRepository.getSeriesFlow(nameStartsWith).collect() {
+            marvelRepository.getSeriesFlow(searchQuery).collect() {
                 _resultSeries.postValue(it)
             }
         }
     }
 
-    fun flowCharacters(nameStartsWith: String? = null) {
+    fun flowCharacters(searchQuery: String? = null) {
         viewModelScope.launch(ioDispatcher) {
-            marvelRepository.getCharactersFlow(nameStartsWith).collect() {
+            marvelRepository.getCharactersFlow(searchQuery).collect() {
                 _resultCharacters.postValue(it)
             }
         }

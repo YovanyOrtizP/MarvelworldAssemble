@@ -60,11 +60,6 @@ class CharactersFragment : BaseFragment() {
         //Displaying characters for first time
         viewModel.flowCharacters()
 
-        //When the user wants to search an specific character, call the function
-        binding.searchButton.setOnClickListener {
-            searchCharacter()
-        }
-
         //Function to do swipe to refresh
         swipeRefresh()
 
@@ -91,15 +86,4 @@ class CharactersFragment : BaseFragment() {
         }
     }
 
-    private fun searchCharacter() {
-        val searchCharacter = binding.etCharacter.text.toString().trim()
-        if (searchCharacter.isNotEmpty()) {
-            hideKeyboard()
-            binding.etCharacter.setText("")
-            binding.pbLoading.visibility = View.VISIBLE
-            Handler(Looper.getMainLooper()).postDelayed({
-                viewModel.flowCharacters(searchCharacter)
-            }, 1500)
-        }
-    }
 }

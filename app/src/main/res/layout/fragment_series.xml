@@ -1,47 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nsView"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.series.SeriesFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/etCharacter"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_series"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/baseline_search"
-            android:hint="Search by name"
-            android:maxLines="1"
-            android:singleLine="true"/>
+            android:layout_height="match_parent">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/king"
-            android:text="Search"
-            android:textColor="@color/white"
-            android:textStyle="bold"/>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvSeries"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                            tools:itemCount="15" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvSeries"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            tools:itemCount="15" />
+                        <ProgressBar
+                            android:id="@+id/pbLoading"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            android:layout_gravity="center"/>
 
-        <ProgressBar
-            android:id="@+id/pbLoading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+                </FrameLayout>
 
-    </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</androidx.core.widget.NestedScrollView>
+</LinearLayout>

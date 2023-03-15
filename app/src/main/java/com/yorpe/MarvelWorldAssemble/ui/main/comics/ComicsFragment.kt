@@ -2,6 +2,8 @@ package com.yorpe.MarvelWorldAssemble.ui.main.comics
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +16,15 @@ import com.yorpe.MarvelWorldAssemble.data.model.comics.ComicsResponse
 import com.yorpe.MarvelWorldAssemble.data.model.comics.ResultComRes
 import com.yorpe.MarvelWorldAssemble.databinding.FragmentComicsBinding
 import com.yorpe.MarvelWorldAssemble.ui.main.viewmodel.GeneralViewModel
+import com.yorpe.MarvelWorldAssemble.util.BaseFragment
 import com.yorpe.MarvelWorldAssemble.util.ResponseType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ComicsFragment : Fragment() {
+class ComicsFragment : BaseFragment() {
     private var _binding: FragmentComicsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: GeneralViewModel by activityViewModels()
 
     private val mAdapter by lazy {
         ComicsAdapter {
@@ -56,18 +58,9 @@ class ComicsFragment : Fragment() {
             }
         }
 
-        binding.searchButton.setOnClickListener{
-            val searchCharacter = binding.etCharacter.text.toString().trim()
-            if(searchCharacter.isNotEmpty()){
-                viewModel.flowComics(searchCharacter)
-                hideKeyboard()
-                binding.etCharacter.setText("")
-            }else{
-                viewModel.flowComics(null)
-            }
-        }
-
         viewModel.flowComics()
+
+        swipeRefresh()
 
         return binding.root
     }
@@ -83,10 +76,12 @@ class ComicsFragment : Fragment() {
         _binding =  null
     }
 
-    private fun hideKeyboard(){
-        val activity = requireActivity()
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        val view = activity.currentFocus ?: View(activity)
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken,0)
+    private fun swipeRefresh() {
+        binding.swipeComics.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.swipeComics.isRefreshing = false
+            }, 1500)
+            viewModel.flowComics()
+        }
     }
 }

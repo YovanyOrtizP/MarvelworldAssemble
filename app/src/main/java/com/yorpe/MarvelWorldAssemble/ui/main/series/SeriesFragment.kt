@@ -2,6 +2,8 @@ package com.yorpe.MarvelWorldAssemble.ui.main.series
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,15 +16,15 @@ import com.yorpe.MarvelWorldAssemble.data.model.series.ResultSResp
 import com.yorpe.MarvelWorldAssemble.data.model.series.SeriesResponse
 import com.yorpe.MarvelWorldAssemble.databinding.FragmentSeriesBinding
 import com.yorpe.MarvelWorldAssemble.ui.main.viewmodel.GeneralViewModel
+import com.yorpe.MarvelWorldAssemble.util.BaseFragment
 import com.yorpe.MarvelWorldAssemble.util.ResponseType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SeriesFragment : Fragment() {
+class SeriesFragment : BaseFragment() {
     private var _binding: FragmentSeriesBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: GeneralViewModel by activityViewModels()
 
     private val mAdapter by lazy {
         SeriesAdapter{
@@ -59,19 +61,9 @@ class SeriesFragment : Fragment() {
             }
         }
 
-        binding.searchButton.setOnClickListener{
-            val searchCharacter = binding.etCharacter.text.toString().trim()
-            if(searchCharacter.isNotEmpty()){
-                viewModel.flowSeries(searchCharacter)
-                hideKeyboard()
-                binding.etCharacter.setText("")
-            }else{
-                viewModel.flowSeries(null)
-            }
-        }
-
-
         viewModel.flowSeries()
+
+        swipeRefresh()
 
         return binding.root
     }
@@ -87,10 +79,24 @@ class SeriesFragment : Fragment() {
         _binding =  null
     }
 
-    private fun hideKeyboard(){
-        val activity = requireActivity()
-        val inputMethodManager = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        val view = activity.currentFocus ?: View(activity)
-        inputMethodManager.hideSoftInputFromWindow(view.windowToken,0)
+    private fun swipeRefresh(){
+        binding.swipeSeries.setOnRefreshListener {
+            Handler(Looper.getMainLooper()).postDelayed({
+                binding.swipeSeries.isRefreshing = false
+            }, 1500)
+            viewModel.flowSeries()
+        }
     }
+
+//    private fun searchSerie() {
+//        val searchCharacter = binding.etSerie.text.toString().trim()
+//        if (searchCharacter.isNotEmpty()) {
+//            hideKeyboard()
+//            binding.etSerie.setText("")
+//            binding.pbLoading.visibility = View.VISIBLE
+//            Handler(Looper.getMainLooper()).postDelayed({
+//                viewModel.flowSeries(searchCharacter)
+//            }, 1500)
+//        }
+//    }
 }

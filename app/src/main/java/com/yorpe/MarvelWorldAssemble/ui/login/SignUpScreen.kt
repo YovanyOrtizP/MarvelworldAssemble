@@ -39,8 +39,8 @@ class SignUpScreen : Fragment() {
                 if(Patterns.EMAIL_ADDRESS.matcher(email).matches()){
 
                     //Check that the password was created with the parameters requested
-                    if (password.length < 8 || !password.matches(".*[A-Z].*".toRegex())
-                        || !password.matches(".*[a-z].*".toRegex()) || !password.matches(".*[@#$%^&*=+].*".toRegex())){
+                    if (password.length < 8 && !password.matches(".*[A-Z].*".toRegex())
+                        && !password.matches(".*[a-z].*".toRegex()) && !password.matches(".*[@#$%^&*=+].*".toRegex())){
 
                         //Check that the passwords match
                         if(password == confirmPassword){
